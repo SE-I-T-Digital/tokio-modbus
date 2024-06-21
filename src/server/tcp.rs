@@ -185,18 +185,11 @@ fn listener(addr: SocketAddr, workers: usize) -> io::Result<TcpListener> {
     TcpListener::from_std(listener.into())
 }
 
-#[cfg(unix)]
 #[allow(unused)]
 fn configure_tcp(workers: usize, tcp: &Socket) -> io::Result<()> {
     if workers > 1 {
         tcp.reuse_port()?;
     }
-    Ok(())
-}
-
-#[cfg(windows)]
-#[allow(unused)]
-fn configure_tcp(_workers: usize, _tcp: &Socket) -> io::Result<()> {
     Ok(())
 }
 
